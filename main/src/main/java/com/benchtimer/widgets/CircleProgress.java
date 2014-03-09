@@ -107,8 +107,9 @@ public class CircleProgress extends SurfaceView implements SurfaceHolder.Callbac
         super.onDraw(canvas);
         Paint paint = new Paint(Paint.FILTER_BITMAP_FLAG | Paint.DITHER_FLAG | Paint.ANTI_ALIAS_FLAG);
         drawArcLoading(paint, canvas);
-        drawText("00:00:00", canvas);
+        drawText("00:32:25", canvas);
     }
+
 
 
     @Override

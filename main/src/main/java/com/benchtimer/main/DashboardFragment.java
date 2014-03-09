@@ -1,5 +1,6 @@
 package com.benchtimer.main;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -42,7 +43,8 @@ public class DashboardFragment extends Fragment {
         TextView textView = chooseTimerIndicator(rootView);
         //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
         //textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-        textView.setBackgroundResource(R.drawable.back_fill);
+        //textView.setBackgroundResource(R.drawable.back_fill);
+
         return rootView;
     }
 
@@ -51,15 +53,19 @@ public class DashboardFragment extends Fragment {
         switch(getArguments().getInt(ARG_SECTION_NUMBER)) {
             case 1:
                 textView = (TextView) rootView.findViewById(R.id.timer1);
+                textView.setBackgroundColor(Color.parseColor("#4697d0"));
                 break;
             case 2:
                 textView = (TextView) rootView.findViewById(R.id.timer2);
+                textView.setBackgroundColor(Color.parseColor("#b67676"));
                 break;
             case 3:
                 textView = (TextView) rootView.findViewById(R.id.timer3);
+                textView.setBackgroundColor(Color.parseColor("#a59442"));
                 break;
             case 4:
                 textView = (TextView) rootView.findViewById(R.id.timer4);
+                textView.setBackgroundColor(Color.parseColor("#708850"));
                 break;
             default:
                 throw new NullPointerException("Cannot find the Correct Timer View");

@@ -47,7 +47,7 @@
             android:layout_height="@dimen/timer_indicator_length"
             android:text="T2"
             style="@style/TimerIndicatorText"
-            android:background="@drawable/back"
+            android:background="@drawable/back_red"
             android:id="@+id/timer2" />
 
         <TextView
@@ -55,7 +55,7 @@
             android:layout_height="@dimen/timer_indicator_length"
             android:text="T3"
             style="@style/TimerIndicatorText"
-            android:background="@drawable/back"
+            android:background="@drawable/back_yellow"
             android:id="@+id/timer3" />
 
         <TextView
@@ -63,7 +63,7 @@
             android:layout_height="@dimen/timer_indicator_length"
             android:text="T4"
             style="@style/TimerIndicatorText"
-            android:background="@drawable/back"
+            android:background="@drawable/back_green"
             android:id="@+id/timer4" />
 
         <ImageView
@@ -84,7 +84,7 @@
         android:gravity="left|center"
         android:id="@+id/currentProtocol"
         style="@style/TimerIndicatorText"
-        android:background="@drawable/back_fill"
+        android:background="#4697d0"
         android:layout_below="@+id/timerIndicatorContainer" />
 
     <com.benchtimer.widgets.LeadingTextView
@@ -105,7 +105,7 @@
         android:layout_height="220dp"
         android:layout_below="@+id/nextProtocol"
         android:layout_centerHorizontal="true"
-        custom:circleColor="#ff5bccff"
+        custom:circleColor="#ff4697d0"
         custom:circleCenterPointX="220"
         custom:circleCenterPointY="220"
         custom:circleRadius="210"
