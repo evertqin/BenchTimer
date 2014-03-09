@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleProgressWidget">
+        <attr name="circleColor" format="color" />
+        <attr name="circleStrokeWidth" format="float" />
+        <attr name="circleCenterPointX" format="float" />
+        <attr name="circleCenterPointY" format="float" />
+        <attr name="circleRadius" format="float" />
+        <attr name="textLocationX" format="float" />
+        <attr name="textLocationY" format="float" />
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="float" />
+        <attr name="circlePercentage" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="LeadingTextView">
+        <attr name="leadingText" format="string" />
+        <!--attr name="leadingTextFace" format="integer" /-->
+    </declare-styleable>
+
+</resources>

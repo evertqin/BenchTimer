@@ -1,0 +1,139 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.benchtimer.main.Dashboard$PlaceholderFragment">
+
+    <TextView
+        android:id="@+id/section_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Western Blot"
+        android:id="@+id/protocolName"
+        style="@style/CaptionText"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/protocolName"
+        android:id="@+id/timerIndicatorContainer">
+
+
+        <TextView
+            android:layout_width="@dimen/timer_indicator_length"
+            android:layout_height="@dimen/timer_indicator_length"
+            android:text="T1"
+            style="@style/TimerIndicatorText"
+            android:background="@drawable/back"
+            android:id="@+id/timer1" />
+
+        <TextView
+            android:layout_width="@dimen/timer_indicator_length"
+            android:layout_height="@dimen/timer_indicator_length"
+            android:text="T2"
+            style="@style/TimerIndicatorText"
+            android:background="@drawable/back"
+            android:id="@+id/timer2" />
+
+        <TextView
+            android:layout_width="@dimen/timer_indicator_length"
+            android:layout_height="@dimen/timer_indicator_length"
+            android:text="T3"
+            style="@style/TimerIndicatorText"
+            android:background="@drawable/back"
+            android:id="@+id/timer3" />
+
+        <TextView
+            android:layout_width="@dimen/timer_indicator_length"
+            android:layout_height="@dimen/timer_indicator_length"
+            android:text="T4"
+            style="@style/TimerIndicatorText"
+            android:background="@drawable/back"
+            android:id="@+id/timer4" />
+
+        <ImageView
+            android:layout_width="@dimen/timer_indicator_length"
+            android:layout_height="@dimen/timer_indicator_length"
+            android:src="@drawable/ic_action_new"
+            android:background="@drawable/back_circle"
+            android:id="@+id/addNewTimer" />
+
+
+    </LinearLayout>
+
+    <com.benchtimer.widgets.LeadingTextView
+        android:layout_width="@dimen/protocol_text_length"
+        android:layout_height="@dimen/timer_indicator_length"
+        android:text="Primary antibody incubation 30 min"
+        custom:leadingText="@string/current"
+        android:gravity="left|center"
+        android:id="@+id/currentProtocol"
+        style="@style/TimerIndicatorText"
+        android:background="@drawable/back_fill"
+        android:layout_below="@+id/timerIndicatorContainer" />
+
+    <com.benchtimer.widgets.LeadingTextView
+        android:layout_width="@dimen/protocol_text_length"
+        android:layout_height="@dimen/timer_indicator_length"
+        android:text="Wash 5 min"
+        custom:leadingText="@string/next"
+        android:gravity="left|center"
+        android:id="@+id/nextProtocol"
+        style="@style/TimerIndicatorText"
+        android:background="@drawable/back"
+        android:layout_below="@+id/currentProtocol" />
+
+
+    <com.benchtimer.widgets.CircleProgress
+        android:id="@+id/circle_progress"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_below="@+id/nextProtocol"
+        android:layout_centerHorizontal="true"
+        custom:circleColor="#ff5bccff"
+        custom:circleCenterPointX="220"
+        custom:circleCenterPointY="220"
+        custom:circleRadius="210"
+        custom:textColor="#000000" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/circle_progress"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/playButton"
+            android:src="@drawable/ic_action_play" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/pauseButton"
+            android:src="@drawable/ic_action_pause" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
