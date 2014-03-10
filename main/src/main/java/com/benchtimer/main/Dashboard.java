@@ -9,6 +9,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.benchtimer.widgets.TimerViewPager;
+
 import java.util.Locale;
 
 
@@ -27,7 +29,7 @@ public class Dashboard extends ActionBarActivity {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    ViewPager mViewPager;
+    TimerViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class Dashboard extends ActionBarActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager = (TimerViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
     }

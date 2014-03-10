@@ -36,7 +36,6 @@ public class ProtocolTimer extends CountDownTimer {
     @Override
     public void onFinish() {
         String formattedTime = Utils.formatTimeIntoDisplay(0);
-        float percent = 0f;
         mCircleProgress.changeView(0f, formattedTime);
     }
 

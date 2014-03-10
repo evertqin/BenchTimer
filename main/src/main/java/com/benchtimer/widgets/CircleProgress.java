@@ -7,10 +7,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.RectF;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.os.Handler;
 
 import com.benchtimer.main.R;
 
@@ -119,15 +119,13 @@ public class CircleProgress extends SurfaceView implements SurfaceHolder.Callbac
         });
     }
 
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         Paint paint = new Paint(Paint.FILTER_BITMAP_FLAG | Paint.DITHER_FLAG | Paint.ANTI_ALIAS_FLAG);
         drawArcLoading(paint, canvas);
-        drawText(mText,canvas);
+        drawText(mText, canvas);
     }
-
 
 
     @Override

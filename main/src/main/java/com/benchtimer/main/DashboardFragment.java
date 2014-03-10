@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.benchtimer.come.benchtimer.time.ProtocolTimer;
 import com.benchtimer.widgets.CircleProgress;
 
+import java.util.ArrayList;
+
 /**
  * Created by evert on 3/8/14.
  */
@@ -20,7 +22,7 @@ public class DashboardFragment extends Fragment {
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
-
+    private static ArrayList<ProtocolTimer> mProtocolTimers;
     /**
      * Returns a new instance of this fragment for the given section
      * number.
@@ -44,11 +46,8 @@ public class DashboardFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
         TextView textView = chooseTimerIndicator(rootView);
-        //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-        //textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-        //textView.setBackgroundResource(R.drawable.back_fill);
         CircleProgress circleProgress = (CircleProgress) rootView.findViewById(R.id.circle_progress);
-        ProtocolTimer protocolTimer = new ProtocolTimer(5000, 10, getActivity(),circleProgress);
+        ProtocolTimer protocolTimer = new ProtocolTimer(5000, 10, getActivity(), circleProgress);
         protocolTimer.start();
         return rootView;
     }
@@ -77,6 +76,10 @@ public class DashboardFragment extends Fragment {
 
         }
         return textView;
+    }
+
+    public void test() {
+
     }
 
 
