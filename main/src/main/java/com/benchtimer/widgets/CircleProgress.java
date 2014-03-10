@@ -10,6 +10,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.os.Handler;
 
 import com.benchtimer.main.R;
 
@@ -31,7 +32,7 @@ public class CircleProgress extends SurfaceView implements SurfaceHolder.Callbac
 
     private float mCirclePercentage;
 
-    private SurfaceHolder mSurfaceHolder;
+    public Handler uiThread = new Handler();
 
 
     public CircleProgress(Context context, AttributeSet attributeSet) {
@@ -94,7 +95,7 @@ public class CircleProgress extends SurfaceView implements SurfaceHolder.Callbac
         canvas.drawArc(box, -90, sweep, false, paint);
     }
 
-    public void drawText(String timeStr, Canvas canvas) {
+    private void drawText(String timeStr, Canvas canvas) {
         Paint textPaint = new Paint();
         textPaint.setColor(mTextColor);
         textPaint.setTextSize(mTextSize);
@@ -105,6 +106,17 @@ public class CircleProgress extends SurfaceView implements SurfaceHolder.Callbac
         int positionX = (getMeasuredWidth() / 2);
         int positionY = (int) ((getMeasuredWidth() / 2) - ((textPaint.descent() + textPaint.ascent()) / 2));
         canvas.drawText(timeStr, positionX, positionY, textPaint);
+    }
+
+    public void changeView(float percent, String text) {
+        mCirclePercentage = percent;
+        mText = text;
+        uiThread.post(new Runnable() {
+            @Override
+            public void run() {
+                invalidate();
+            }
+        });
     }
 
 
@@ -123,9 +135,6 @@ public class CircleProgress extends SurfaceView implements SurfaceHolder.Callbac
 
     }
 
-    public SurfaceHolder getSurfaceHolder() {
-        return mSurfaceHolder;
-    }
 
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i2, int i3) {

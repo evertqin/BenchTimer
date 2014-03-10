@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.benchtimer.come.benchtimer.time.ProtocolTimer;
 import com.benchtimer.widgets.CircleProgress;
 
 /**
@@ -47,6 +48,8 @@ public class DashboardFragment extends Fragment {
         //textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
         //textView.setBackgroundResource(R.drawable.back_fill);
         CircleProgress circleProgress = (CircleProgress) rootView.findViewById(R.id.circle_progress);
+        ProtocolTimer protocolTimer = new ProtocolTimer(5000, 10, getActivity(),circleProgress);
+        protocolTimer.start();
         return rootView;
     }
 
