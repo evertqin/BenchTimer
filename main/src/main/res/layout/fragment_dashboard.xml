@@ -109,6 +109,7 @@
         custom:circleCenterPointX="220"
         custom:circleCenterPointY="220"
         custom:circleRadius="210"
+        custom:text="00:32:25"
         custom:textColor="#000000" />
 
     <LinearLayout
@@ -117,7 +118,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/circle_progress"
         android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout">
 
         <ImageView
             android:layout_width="wrap_content"

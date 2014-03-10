@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.benchtimer.widgets.CircleProgress;
+
 /**
  * Created by evert on 3/8/14.
  */
@@ -44,12 +46,12 @@ public class DashboardFragment extends Fragment {
         //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
         //textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
         //textView.setBackgroundResource(R.drawable.back_fill);
-
+        CircleProgress circleProgress = (CircleProgress) rootView.findViewById(R.id.circle_progress);
         return rootView;
     }
 
     private TextView chooseTimerIndicator(View rootView) {
-        TextView textView = null;
+        TextView textView;
         switch(getArguments().getInt(ARG_SECTION_NUMBER)) {
             case 1:
                 textView = (TextView) rootView.findViewById(R.id.timer1);
@@ -73,4 +75,6 @@ public class DashboardFragment extends Fragment {
         }
         return textView;
     }
+
+
 }

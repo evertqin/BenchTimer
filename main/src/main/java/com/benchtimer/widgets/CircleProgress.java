@@ -22,14 +22,16 @@ public class CircleProgress extends SurfaceView implements SurfaceHolder.Callbac
     private int mColor;
     private float mCircleStrokWidth;
     private float mCircleRadius;
-    private float mCircleInnderColor;
 
+    private String mText;
     private float mTextLocationX;
     private float mTextLocationY;
     private int mTextColor;
     private float mTextSize;
 
     private float mCirclePercentage;
+
+    private SurfaceHolder mSurfaceHolder;
 
 
     public CircleProgress(Context context, AttributeSet attributeSet) {
@@ -51,7 +53,7 @@ public class CircleProgress extends SurfaceView implements SurfaceHolder.Callbac
         mTextLocationX = ta.getFloat(R.styleable.CircleProgressWidget_circleCenterPointX, 40f);
         mTextLocationY = ta.getFloat(R.styleable.CircleProgressWidget_circleCenterPointY, 40f);
         mCirclePercentage = ta.getFloat(R.styleable.CircleProgressWidget_circlePercentage, 60f);
-
+        mText = ta.getString(R.styleable.CircleProgressWidget_text);
 
         ta.recycle();
     }
@@ -76,6 +78,10 @@ public class CircleProgress extends SurfaceView implements SurfaceHolder.Callbac
     }
 
     private void drawArcLoading(Paint paint, Canvas canvas) {
+        drawArcLoading(mCirclePercentage, paint, canvas);
+    }
+
+    private void drawArcLoading(float circlePercentage, Paint paint, Canvas canvas) {
         paint.setDither(true);
         paint.setColor(mColor);
         paint.setStyle(Paint.Style.STROKE);
@@ -84,11 +90,11 @@ public class CircleProgress extends SurfaceView implements SurfaceHolder.Callbac
         float delta = mCircleCenterPointX - mCircleRadius;
         float arcSize = (mCircleCenterPointX - (delta / 2f)) * 2f;
         RectF box = new RectF(delta, delta, arcSize, arcSize);
-        float sweep = 360 * mCirclePercentage * 0.01f;
-        canvas.drawArc(box, 50, sweep, false, paint);
+        float sweep = 360 * circlePercentage * 0.01f;
+        canvas.drawArc(box, -90, sweep, false, paint);
     }
 
-    private void drawText(String timeStr, Canvas canvas) {
+    public void drawText(String timeStr, Canvas canvas) {
         Paint textPaint = new Paint();
         textPaint.setColor(mTextColor);
         textPaint.setTextSize(mTextSize);
@@ -107,7 +113,7 @@ public class CircleProgress extends SurfaceView implements SurfaceHolder.Callbac
         super.onDraw(canvas);
         Paint paint = new Paint(Paint.FILTER_BITMAP_FLAG | Paint.DITHER_FLAG | Paint.ANTI_ALIAS_FLAG);
         drawArcLoading(paint, canvas);
-        drawText("00:32:25", canvas);
+        drawText(mText,canvas);
     }
 
 
@@ -115,6 +121,10 @@ public class CircleProgress extends SurfaceView implements SurfaceHolder.Callbac
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
 
+    }
+
+    public SurfaceHolder getSurfaceHolder() {
+        return mSurfaceHolder;
     }
 
     @Override

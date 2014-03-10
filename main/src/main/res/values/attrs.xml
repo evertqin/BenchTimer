@@ -10,6 +10,7 @@
         <attr name="textLocationY" format="float" />
         <attr name="textColor" format="color" />
         <attr name="textSize" format="float" />
+        <attr name="text" format="string" />
         <attr name="circlePercentage" format="float" />
     </declare-styleable>
 
