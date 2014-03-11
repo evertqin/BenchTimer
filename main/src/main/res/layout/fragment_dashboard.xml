@@ -9,19 +9,10 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.benchtimer.main.Dashboard$PlaceholderFragment">
 
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Western Blot"
-        android:id="@+id/protocolName"
-        style="@style/CaptionText"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+    <!--    <TextView
+            android:id="@+id/section_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />-->
 
 
     <LinearLayout
@@ -30,7 +21,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/protocolName"
+        android:layout_alignParentTop="true"
         android:id="@+id/timerIndicatorContainer">
 
 
@@ -38,7 +29,7 @@
             android:layout_width="@dimen/timer_indicator_length"
             android:layout_height="@dimen/timer_indicator_length"
             android:text="T1"
-            style="@style/TimerIndicatorText"
+            style="@style/TimerIndicatorTextLeft"
             android:background="@drawable/back"
             android:id="@+id/timer1" />
 
@@ -69,12 +60,22 @@
         <ImageView
             android:layout_width="@dimen/timer_indicator_length"
             android:layout_height="@dimen/timer_indicator_length"
+            style="@style/TimerIndicatorTextRight"
             android:src="@drawable/ic_action_new"
             android:background="@drawable/back_circle"
             android:id="@+id/addNewTimer" />
 
 
     </LinearLayout>
+
+    <!--       <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Western Blot"
+                android:id="@+id/protocolName"
+                style="@style/CaptionText"
+                android:layout_below="@id/timerIndicatorContainer"
+                android:layout_centerHorizontal="true" />-->
 
     <com.benchtimer.widgets.LeadingTextView
         android:layout_width="@dimen/protocol_text_length"
@@ -83,7 +84,7 @@
         custom:leadingText="@string/current"
         android:gravity="left|center"
         android:id="@+id/currentProtocol"
-        style="@style/TimerIndicatorText"
+        style="@style/ProtocolDescription"
         android:background="#4697d0"
         android:layout_below="@+id/timerIndicatorContainer" />
 
@@ -94,48 +95,48 @@
         custom:leadingText="@string/next"
         android:gravity="left|center"
         android:id="@+id/nextProtocol"
-        style="@style/TimerIndicatorText"
+        style="@style/ProtocolDescription"
         android:background="@drawable/back"
         android:layout_below="@+id/currentProtocol" />
 
-
     <com.benchtimer.widgets.CircleProgress
         android:id="@+id/circle_progress"
-        android:layout_width="220dp"
-        android:layout_height="220dp"
+        android:layout_width="310dp"
+        android:layout_height="310dp"
         android:layout_below="@+id/nextProtocol"
         android:layout_centerHorizontal="true"
         custom:circleColor="#ff4697d0"
-        custom:circleCenterPointX="220"
-        custom:circleCenterPointY="220"
-        custom:circleRadius="210"
+        custom:circleCenterPointX="310"
+        custom:circleCenterPointY="310"
+        custom:circleRadius="300"
         custom:text="00:32:25"
+        custom:textSize="90"
         custom:textColor="#000000" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/circle_progress"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout">
+    <!--   <LinearLayout
+           android:orientation="horizontal"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/circle_progress"
+           android:layout_marginTop="20dp"
+           android:layout_centerHorizontal="true"
+           android:id="@+id/linearLayout">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/playButton"
-            android:src="@drawable/ic_action_play" />
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:id="@+id/playButton"
+               android:src="@drawable/ic_action_play" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/pauseButton"
-            android:src="@drawable/ic_action_pause" />
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:id="@+id/pauseButton"
+               android:src="@drawable/ic_action_pause" />
 
-    </LinearLayout>
+       </LinearLayout>-->
 
 
 </RelativeLayout>

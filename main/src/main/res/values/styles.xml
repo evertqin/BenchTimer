@@ -1,8 +1,10 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
+        <!--item name="android:windowActionBar">false</item-->
+        <item name="android:windowTitleSize">0dp</item>
     </style>
     <style name="CaptionText" parent="android:TextAppearance.Large" >
         <item name="android:textColor" >#ff000000</item>
@@ -15,6 +17,36 @@
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_margin">@dimen/timer_indicator_margin</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
+    </style>
+
+    <style name="TimerIndicatorTextLeft" parent="android:TextAppearance.Medium" >
+        <item name="android:textColor" >#ff000000</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginRight">@dimen/timer_indicator_margin</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
+    </style>
+
+    <style name="TimerIndicatorTextRight" parent="android:TextAppearance.Medium" >
+        <item name="android:textColor" >#ff000000</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginLeft">@dimen/timer_indicator_margin</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
+    </style>
+
+    <style name="ProtocolDescription" parent="android:TextAppearance.DeviceDefault.Small" >
+        <item name="android:textColor" >#ff000000</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">5dp</item>
         <item name="android:paddingLeft">4dp</item>
         <item name="android:paddingRight">4dp</item>
     </style>

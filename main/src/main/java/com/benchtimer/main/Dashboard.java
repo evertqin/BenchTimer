@@ -31,6 +31,10 @@ public class Dashboard extends ActionBarActivity {
      */
     TimerViewPager mViewPager;
 
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +48,7 @@ public class Dashboard extends ActionBarActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (TimerViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
+        getActionBar().setDisplayShowHomeEnabled(false);
     }
 
 

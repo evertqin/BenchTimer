@@ -23,13 +23,13 @@ public class DashboardFragment extends Fragment {
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
     private static ArrayList<ProtocolTimer> mProtocolTimers;
+
     /**
      * Returns a new instance of this fragment for the given section
      * number.
      */
 
     public DashboardFragment() {
-
     }
 
     public static DashboardFragment newInstance(int sectionNumber) {
@@ -54,22 +54,26 @@ public class DashboardFragment extends Fragment {
 
     private TextView chooseTimerIndicator(View rootView) {
         TextView textView;
-        switch(getArguments().getInt(ARG_SECTION_NUMBER)) {
+        switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
             case 1:
                 textView = (TextView) rootView.findViewById(R.id.timer1);
                 textView.setBackgroundColor(Color.parseColor("#4697d0"));
+                ((Dashboard) getActivity()).setActionBarTitle("Western Block");
                 break;
             case 2:
                 textView = (TextView) rootView.findViewById(R.id.timer2);
                 textView.setBackgroundColor(Color.parseColor("#b67676"));
+                ((Dashboard) getActivity()).setActionBarTitle("Western Block");
                 break;
             case 3:
                 textView = (TextView) rootView.findViewById(R.id.timer3);
                 textView.setBackgroundColor(Color.parseColor("#a59442"));
+                ((Dashboard) getActivity()).setActionBarTitle("Eastern Block");
                 break;
             case 4:
                 textView = (TextView) rootView.findViewById(R.id.timer4);
                 textView.setBackgroundColor(Color.parseColor("#708850"));
+                ((Dashboard) getActivity()).setActionBarTitle("Eastern Block");
                 break;
             default:
                 throw new NullPointerException("Cannot find the Correct Timer View");
