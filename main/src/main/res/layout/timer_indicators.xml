@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_centerHorizontal="true"
+    android:layout_alignParentTop="true"
+    android:id="@+id/timerIndicatorContainer">
+
+    <TextView
+        android:layout_width="@dimen/timer_indicator_length"
+        android:layout_height="@dimen/timer_indicator_length"
+        android:text="T1"
+        style="@style/TimerIndicatorTextLeft"
+        android:background="@drawable/back"
+        android:id="@+id/timer0" />
+
+    <TextView
+        android:layout_width="@dimen/timer_indicator_length"
+        android:layout_height="@dimen/timer_indicator_length"
+        android:text="T2"
+        style="@style/TimerIndicatorText"
+        android:background="@drawable/back_red"
+        android:id="@+id/timer1" />
+
+    <TextView
+        android:layout_width="@dimen/timer_indicator_length"
+        android:layout_height="@dimen/timer_indicator_length"
+        android:text="T3"
+        style="@style/TimerIndicatorText"
+        android:background="@drawable/back_yellow"
+        android:id="@+id/timer2" />
+
+    <TextView
+        android:layout_width="@dimen/timer_indicator_length"
+        android:layout_height="@dimen/timer_indicator_length"
+        android:text="T4"
+        style="@style/TimerIndicatorText"
+        android:background="@drawable/back_green"
+        android:id="@+id/timer3" />
+
+    <ImageView
+        android:layout_width="@dimen/timer_indicator_length"
+        android:layout_height="@dimen/timer_indicator_length"
+        style="@style/TimerIndicatorTextRight"
+        android:src="@drawable/ic_action_new"
+        android:background="@drawable/back_circle"
+        android:id="@+id/addNewTimer" />
+</LinearLayout>

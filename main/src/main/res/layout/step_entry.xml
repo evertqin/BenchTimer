@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/step_entry">
+
+    <!--    <TextView
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="Protocol Name"
+            android:focusableInTouchMode="false"
+            android:clickable="false"
+            android:focusable="false"
+            android:id="@+id/protocol_name_label"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignBottom="@+id/protocol_name"
+            android:textSize="15dip" />-->
+    <include
+        layout="@layout/step_meta"
+        android:id="@+id/step_meta"
+        android:layout_marginLeft="30dp" />
+
+    <AutoCompleteTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New AutoCompleteTextView"
+        android:id="@+id/protocol_name"
+        android:singleLine="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/step_meta"
+        android:layout_alignParentEnd="true"
+        android:imeOptions="actionNext"
+        android:textSize="20dip" />
+
+
+    <!--    <TextView
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="Set Time"
+            android:focusableInTouchMode="false"
+            android:clickable="false"
+            android:focusable="false"
+            android:id="@+id/protocol_settime_label"
+            android:layout_below="@+id/protocol_name_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignBottom="@+id/protocol_settime"
+            android:textSize="15dip" />-->
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
+        android:id="@+id/protocol_settime"
+        android:layout_below="@+id/protocol_name"
+        android:layout_alignLeft="@+id/protocol_name"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="18dip" />
+
+
+</RelativeLayout>

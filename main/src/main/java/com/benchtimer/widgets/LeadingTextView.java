@@ -14,7 +14,6 @@ import com.benchtimer.main.R;
 public class LeadingTextView extends TextView {
 
     private String mLeadingText;
-    //private int mLeadingTextFace;
 
     public LeadingTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -26,14 +25,16 @@ public class LeadingTextView extends TextView {
     private void initAttributes(Context context, AttributeSet attrs) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.LeadingTextView);
         mLeadingText = ta.getString(R.styleable.LeadingTextView_leadingText);
-        //mLeadingTextFace = ta.getInt(R.styleable.LeadingTextView_leadingTextFace, Typeface.BOLD);
         ta.recycle();
+    }
+
+    @Override
+    public void setText(CharSequence text, BufferType type) {
+        super.setText(Html.fromHtml(mLeadingText + text), type);
     }
 
     private void init() {
         this.setText(Html.fromHtml(mLeadingText + getText()));
-
-        //this.setTypeface(Typeface.create(Typeface.DEFAULT, mLeadingTextFace));
     }
 
 

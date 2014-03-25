@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:yourapp="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.benchtimer.main.ProtocolPage">
+
+    <item
+        android:id="@+id/action_edit"
+        android:title="Edit"
+        android:icon="@drawable/ic_action_edit"
+        yourapp:showAsAction="ifRoom|collapseActionView"
+        yourapp:actionLayout="@layout/protocol_page_actionview_edittext" />
+    <item
+        android:id="@+id/action_new"
+        android:title="New"
+        android:orderInCategory="40"
+        android:icon="@drawable/ic_action_new"
+        yourapp:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        yourapp:showAsAction="never" />
+</menu>

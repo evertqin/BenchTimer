@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
@@ -25,19 +26,20 @@ public class CircleProgress extends SurfaceView implements SurfaceHolder.Callbac
     private float mCircleRadius;
 
     private String mText;
-    private float mTextLocationX;
-    private float mTextLocationY;
+    //private float mTextLocationX;
+    //private float mTextLocationY;
     private int mTextColor;
     private float mTextSize;
+    private Typeface mTextFace;
 
     private float mCirclePercentage;
 
-    public Handler uiThread = new Handler();
+    public Handler handler = new Handler();
 
 
     public CircleProgress(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-        init();
+        init(context);
         initAttributes(context, attributeSet);
     }
 
@@ -51,15 +53,15 @@ public class CircleProgress extends SurfaceView implements SurfaceHolder.Callbac
         mCircleRadius = ta.getFloat(R.styleable.CircleProgressWidget_circleRadius, 20f);
         mTextColor = ta.getColor(R.styleable.CircleProgressWidget_textColor, Color.GREEN);
         mTextSize = ta.getFloat(R.styleable.CircleProgressWidget_textSize, 40f);
-        mTextLocationX = ta.getFloat(R.styleable.CircleProgressWidget_circleCenterPointX, 40f);
-        mTextLocationY = ta.getFloat(R.styleable.CircleProgressWidget_circleCenterPointY, 40f);
+        //mTextLocationX = ta.getFloat(R.styleable.CircleProgressWidget_circleCenterPointX, 40f);
+        //mTextLocationY = ta.getFloat(R.styleable.CircleProgressWidget_circleCenterPointY, 40f);
         mCirclePercentage = ta.getFloat(R.styleable.CircleProgressWidget_circlePercentage, 60f);
         mText = ta.getString(R.styleable.CircleProgressWidget_text);
 
         ta.recycle();
     }
 
-    private void init() {
+    private void init(Context context) {
         setWillNotDraw(false);
         getHolder().addCallback(this);
         setFocusable(true);
@@ -67,6 +69,7 @@ public class CircleProgress extends SurfaceView implements SurfaceHolder.Callbac
             setZOrderOnTop(true);
         }
         getHolder().setFormat(PixelFormat.TRANSPARENT);
+        mTextFace = Typeface.createFromAsset(context.getAssets(), "fonts/robotothin.ttf");
     }
 
 
@@ -102,7 +105,7 @@ public class CircleProgress extends SurfaceView implements SurfaceHolder.Callbac
         textPaint.setStyle(Paint.Style.FILL);
         textPaint.setAntiAlias(true);
         textPaint.setTextAlign(Paint.Align.CENTER);
-
+        textPaint.setTypeface(mTextFace);
         int positionX = (getMeasuredWidth() / 2);
         int positionY = (int) ((getMeasuredWidth() / 2) - ((textPaint.descent() + textPaint.ascent()) / 2));
         canvas.drawText(timeStr, positionX, positionY, textPaint);
@@ -111,7 +114,7 @@ public class CircleProgress extends SurfaceView implements SurfaceHolder.Callbac
     public void changeView(float percent, String text) {
         mCirclePercentage = percent;
         mText = text;
-        uiThread.post(new Runnable() {
+        handler.post(new Runnable() {
             @Override
             public void run() {
                 invalidate();
