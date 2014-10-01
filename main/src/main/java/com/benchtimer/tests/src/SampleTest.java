@@ -1,4 +1,4 @@
-package com.benchtimer.tests;
+package com.benchtimer.tests.src;
 
 import android.test.InstrumentationTestCase;
 

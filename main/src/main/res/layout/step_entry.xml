@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-
+<!--
+This file contains the entry to input each protocol
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"

@@ -3,7 +3,7 @@ package com.benchtimer.main;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.SparseArray;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +18,8 @@ import com.benchtimer.widgets.CircleProgress;
 import com.benchtimer.widgets.LeadingTextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by evert on 3/8/14.
@@ -27,12 +29,13 @@ public class DashboardFragment extends Fragment {
      * The fragment argument representing the section number for this
      * fragment.
      */
+
     private static final String ARG_SECTION_NUMBER = "section_number";
-    private static SparseArray<ProtocolTimer> mProtocolTimers = new SparseArray<ProtocolTimer>(Parameters.TOTAL_NUM_OF_TIMERS);
-    private static SparseArray<View> mConstructedViews = new SparseArray<View>(Parameters.TOTAL_NUM_OF_TIMERS);
-    private static SparseArray<String> mProtocolNames = new SparseArray<String>(Parameters.TOTAL_NUM_OF_TIMERS);
-    private ArrayList<TextView> mTimerIndicators = new ArrayList<TextView>();
-    private int mTimerCount = 0;
+    private static List<ProtocolTimer> mProtocolTimers = Arrays.asList(new ProtocolTimer[Parameters.TOTAL_NUM_OF_TIMERS]);
+    private static List<View> mConstructedViews = Arrays.asList(new View[Parameters.TOTAL_NUM_OF_TIMERS]);
+    private static List<String> mProtocolNames = Arrays.asList(new String[Parameters.TOTAL_NUM_OF_TIMERS]);
+    private List<TextView> mTimerIndicators = new ArrayList<TextView>();
+    private int mProtocolCount = 0;
     private int mId = 0;
 
     private CircleProgress mCircleProgress;
@@ -41,29 +44,24 @@ public class DashboardFragment extends Fragment {
     private LeadingTextView mNextProtocolView;
     private int mCurrentStep = 0;
 
-    /**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     */
 
-    public DashboardFragment() {
-    }
 
-    public static DashboardFragment newInstance(int sectionNumber) {
-        DashboardFragment fragment = new DashboardFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
-        return fragment;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mProtocolCount = TimerDatabaseWorker.getInstance().getProtocolCount();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        super.onCreateView(inflater,container,savedInstanceState);
+        Log.i("DashboardFragment", "In onCreateView");
         mId = getArguments().getInt(ARG_SECTION_NUMBER);
         final View rootView;
         if (mConstructedViews.get(mId) == null) {
-            System.out.println("Creating Dashboard Fragment");
+            Log.i(this.getClass().toString(), "Creating Dashboard Fragment for protocol id " + Integer.toString(mId));
             rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
         } else {
             rootView = mConstructedViews.get(mId);
@@ -76,26 +74,26 @@ public class DashboardFragment extends Fragment {
             getActivity().getActionBar().setTitle(mProtocolNames.get(mId));
         }
 
-        mTimerCount = TimerDatabaseWorker.getInstance(getActivity()).getProtocolCount();
+
         initTextViews(rootView);
-        TextView textView = chooseTimerIndicator(rootView);
 
         mCurrentProtocolText = (LeadingTextView) rootView.findViewById(R.id.current_protocol);
         mNextProtocolView = (LeadingTextView) rootView.findViewById(R.id.next_protocol);
         mCircleProgress = (CircleProgress) rootView.findViewById(R.id.circle_progress);
         initSteps();
-        mConstructedViews.put(mId, rootView);
+        mConstructedViews.set(mId, rootView);
         return rootView;
 
     }
+
 
     private void initTextViews(View rootView) {
         mTimerIndicators.add((TextView) rootView.findViewById(R.id.timer0));
         mTimerIndicators.add((TextView) rootView.findViewById(R.id.timer1));
         mTimerIndicators.add((TextView) rootView.findViewById(R.id.timer2));
         mTimerIndicators.add((TextView) rootView.findViewById(R.id.timer3));
-        System.out.println(mTimerCount);
-        for (int i = mTimerIndicators.size() - 1; i >= mTimerCount; i--) {
+
+        for (int i = mTimerIndicators.size() - 1; i >= mProtocolCount; i--) {
             mTimerIndicators.get(i).setBackgroundResource(R.drawable.back_grey);
         }
     }
@@ -129,22 +127,17 @@ public class DashboardFragment extends Fragment {
 
     private String getProtocolName(int id) {
         String name;
-        if ((name = mProtocolNames.get(id)) != null) {
-            return name;
-        } else {
-            TimerDatabaseWorker timerDatabaseWorker = TimerDatabaseWorker.getInstance(getActivity());
-            name = timerDatabaseWorker.queryProtocolName(id);
-            mProtocolNames.put(id, name);
-            return name;
+        if ((name = mProtocolNames.get(id)) == null) {
+            mProtocolNames.set(id,TimerDatabaseWorker.getInstance().queryProtocolName(id));
         }
+        return name;
     }
 
     private void initCircleProgress(long stepTime) {
         System.out.println("In initCircleProgress");
         if (mProtocolTimers.get(mId) == null) {
             mProtocolTimer = new BenchTimer(stepTime, 10);
-            mProtocolTimers.put(mId, mProtocolTimer);
-
+            mProtocolTimers.set(mId, mProtocolTimer);
         } else {
             mProtocolTimer = mProtocolTimers.get(mId);
         }
@@ -163,21 +156,35 @@ public class DashboardFragment extends Fragment {
     }
 
 
+    /**
+     * Function to set up the initial layout of the fragment
+     */
     private void initSteps() {
-        StepEntry ret = TimerDatabaseWorker.getInstance(getActivity()).getStep(mId, mCurrentStep);
-        // System.out.println(ret.name);
+        StepEntry ret = TimerDatabaseWorker.getInstance().getStep(mId, mCurrentStep);
         if (ret == null) {
             mCurrentProtocolText.setText("(Empty)");
             mNextProtocolView.setText("(Empty)");
             initCircleProgress(0);
         } else {
             mCurrentProtocolText.setText(ret.name + " - " + ret.setTime);
-            StepEntry nextRet = TimerDatabaseWorker.getInstance(getActivity()).getStep(mId, mCurrentStep + 1);
+            StepEntry nextRet = TimerDatabaseWorker.getInstance().getStep(mId, mCurrentStep + 1);
             mNextProtocolView.setText(nextRet == null ? "No more steps" : nextRet.name + " - " + nextRet.setTime);
             mCircleProgress.changeView(100, ret.setTime + ".00");
             initCircleProgress(Utils.convertToTime(ret.setTime));
 
         }
+    }
+
+    /**
+     * Returns a new instance of this fragment for the given section
+     * number.
+     */
+    public static DashboardFragment newInstance(int sectionNumber) {
+        DashboardFragment fragment = new DashboardFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+        fragment.setArguments(args);
+        return fragment;
     }
 
 

@@ -46,15 +46,14 @@ public class EmptyDashboardFragment extends Fragment {
         ArrayList<TextView> allTextViews = new ArrayList<TextView>();
         for(int i = 0; i < linearLayout.getChildCount(); i++) {
             if(linearLayout.getChildAt(i) instanceof TextView) {
-
-                ((TextView) linearLayout.getChildAt(i)).setBackgroundResource(R.drawable.back_grey);
+                linearLayout.getChildAt(i).setBackgroundResource(R.drawable.back_grey);
             }
         }
     }
 
+
     public static EmptyDashboardFragment newInstance() {
-        EmptyDashboardFragment emptyDashboardFragment = new EmptyDashboardFragment();
-        return emptyDashboardFragment;
+        return new EmptyDashboardFragment();
     }
 
 }

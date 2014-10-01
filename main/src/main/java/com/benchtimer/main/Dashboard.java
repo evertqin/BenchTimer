@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -39,7 +40,6 @@ public class Dashboard extends ActionBarActivity {
     private HashMap<Integer, String> mProtocolNames = new HashMap<Integer, String>(Parameters.TOTAL_NUM_OF_TIMERS);
     private int mTimerCount = 0;
 
-
     public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
     }
@@ -49,6 +49,8 @@ public class Dashboard extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         if(savedInstanceState == null) {
             setContentView(R.layout.activity_dashboard);
+            // we need to init the database worker at the start of the program
+            TimerDatabaseWorker.getInstance().init(this);
             // Create the adapter that will return a fragment for each of the three
             // primary sections of the activity.
             mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -71,11 +73,10 @@ public class Dashboard extends ActionBarActivity {
 
                 }
             });
-            //getActionBar().setDisplayShowHomeEnabled(false);
             //get the number of timers, if it is 0, use another layout
-            mTimerCount = TimerDatabaseWorker.getInstance(this).getProtocolCount();
+            mTimerCount = TimerDatabaseWorker.getInstance().getProtocolCount();
+            Log.i(this.getClass().toString(),"Number of timers is " + Integer.toString(mTimerCount));
             mSectionsPagerAdapter.notifyDataSetChanged();
-            //getActionBar().setHomeButtonEnabled(true);
         }
     }
 
@@ -85,8 +86,8 @@ public class Dashboard extends ActionBarActivity {
         if ((name = mProtocolNames.get(id)) != null) {
             return name;
         } else {
-            TimerDatabaseWorker timerDatabaseWorker = TimerDatabaseWorker.getInstance(this);
-            name = timerDatabaseWorker.queryProtocolName(id);
+
+            name = TimerDatabaseWorker.getInstance().queryProtocolName(id);
             mProtocolNames.put(id, name);
             return name;
         }
@@ -130,7 +131,7 @@ public class Dashboard extends ActionBarActivity {
    /*          case 0x102002C: //I don't know why R.id.home does not work
                   return true;*/
             case R.id.action_add:
-                if (TimerDatabaseWorker.getInstance(this).getProtocolCount() < Parameters.TOTAL_NUM_OF_TIMERS) {
+                if (TimerDatabaseWorker.getInstance().getProtocolCount() < Parameters.TOTAL_NUM_OF_TIMERS) {
                     Intent addIntent = new Intent(this, ProtocolPage.class);
                     addIntent.putExtra(Parameters.PAGE_ID_NUM, Parameters.ADD_NEW_PROTOCOL);
                     startActivity(addIntent);
@@ -162,12 +163,7 @@ public class Dashboard extends ActionBarActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a Dashboard Fragment.
-            if (mTimerCount == 0) {
-                return EmptyDashboardFragment.newInstance();
-            } else {
-                Fragment instance = DashboardFragment.newInstance(position);
-                return instance;
-            }
+            return mTimerCount == 0 ? EmptyDashboardFragment.newInstance() : DashboardFragment.newInstance(position);
         }
 
         @Override
@@ -183,17 +179,7 @@ public class Dashboard extends ActionBarActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             Locale l = Locale.getDefault();
-            switch (position) {
-                case 0:
-                    return getString(R.string.title_section1).toUpperCase(l);
-                case 1:
-                    return getString(R.string.title_section2).toUpperCase(l);
-                case 2:
-                    return getString(R.string.title_section3).toUpperCase(l);
-                case 3:
-                    return getString(R.string.title_section3).toUpperCase(l);
-            }
-            return null;
+            return ("Section " + Integer.toString(position)).toUpperCase(l);
         }
     }
 

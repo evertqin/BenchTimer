@@ -19,7 +19,7 @@ import com.benchtimer.data.TimerDatabaseWorker;
 import com.benchtimer.utils.BenchTimerApp;
 import com.benchtimer.utils.Parameters;
 
-import java.util.ArrayList;
+import java.util.List;
 
 
 public class ProtocolPage extends ActionBarActivity {
@@ -28,7 +28,7 @@ public class ProtocolPage extends ActionBarActivity {
     private String mName;
     private StepEntry mSelectedStep;
     private ListView mListView;
-    private ArrayList<StepEntry> mStepEntries = new ArrayList<StepEntry>();
+    private List<StepEntry> mStepEntries;
     private StepEntryAdapter mAdapter;
 
     /**
@@ -112,9 +112,9 @@ public class ProtocolPage extends ActionBarActivity {
                 final EditText editText = (EditText) view.findViewById(R.id.action_bar_edit);
                 mName = editText.getText().toString();
                 if (mId == -1) {
-                    TimerDatabaseWorker.getInstance(getParent()).addNewProtocol(mName);
+                    TimerDatabaseWorker.getInstance().addNewProtocol(mName);
                 } else {
-                    TimerDatabaseWorker.getInstance(getParent()).updateProtocol(mId, mName);
+                    TimerDatabaseWorker.getInstance().updateProtocol(mId, mName);
                 }
                 getActionBar().setTitle(mName);
                 editText.postDelayed(new Runnable() {
@@ -154,12 +154,9 @@ public class ProtocolPage extends ActionBarActivity {
 
     private ListView initListView() {
         mListView = (ListView) findViewById(R.id.protocol_page);
-        TimerDatabaseWorker timerDatabaseWorker = TimerDatabaseWorker.getInstance(this);
-        mStepEntries = timerDatabaseWorker.queryProtocolDetail(mId);
+        mStepEntries = TimerDatabaseWorker.getInstance().queryProtocolDetail(mId);
         mAdapter = new StepEntryAdapter(this, R.layout.activity_protocol_page, mStepEntries);
         mListView.setAdapter(mAdapter);
-/*        listView.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
-        listView.setItemsCanFocus(true);*/
         return mListView;
     }
 
@@ -168,7 +165,6 @@ public class ProtocolPage extends ActionBarActivity {
         StepEntry newStepEntry = new StepEntry();
         mStepEntries.add(newStepEntry);
         mAdapter.notifyDataSetChanged();
-        //mActionMode = this.startActionMode(mActionModeCallback);
 
     }
 
