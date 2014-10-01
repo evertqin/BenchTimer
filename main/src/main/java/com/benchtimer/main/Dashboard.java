@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.benchtimer.data.TimerDatabaseWorker;
 import com.benchtimer.utils.Parameters;
@@ -135,7 +136,14 @@ public class Dashboard extends ActionBarActivity {
                     Intent addIntent = new Intent(this, ProtocolPage.class);
                     addIntent.putExtra(Parameters.PAGE_ID_NUM, Parameters.ADD_NEW_PROTOCOL);
                     startActivity(addIntent);
+                    DashboardFragment.reDraw();
+                } else {
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Cannot create more than 4 timers for now",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
                 }
+
                 return true;
             case R.id.action_settings:
                 Intent settingIntent = new Intent(this, ProtocolPage.class);

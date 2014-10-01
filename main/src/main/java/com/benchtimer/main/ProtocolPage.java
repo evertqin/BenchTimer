@@ -72,7 +72,6 @@ public class ProtocolPage extends ActionBarActivity {
             mId = (Integer) savedInstanceState.getSerializable(Parameters.PROTOCOL_ID);
         }
 
-
         initListView();
         ((BenchTimerApp) this.getApplication()).setCurrentProtocolId(mId);
 
@@ -82,7 +81,6 @@ public class ProtocolPage extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.protocol_page, menu);
         MenuItem menuItem = menu.findItem(R.id.action_edit);

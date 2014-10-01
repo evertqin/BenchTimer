@@ -34,8 +34,10 @@ public class DashboardFragment extends Fragment {
     private static List<ProtocolTimer> mProtocolTimers = Arrays.asList(new ProtocolTimer[Parameters.TOTAL_NUM_OF_TIMERS]);
     private static List<View> mConstructedViews = Arrays.asList(new View[Parameters.TOTAL_NUM_OF_TIMERS]);
     private static List<String> mProtocolNames = Arrays.asList(new String[Parameters.TOTAL_NUM_OF_TIMERS]);
+    private static List<DashboardFragment> mLoadedFragments = Arrays.asList(new DashboardFragment[Parameters.TOTAL_NUM_OF_TIMERS]);
+
     private List<TextView> mTimerIndicators = new ArrayList<TextView>();
-    private int mProtocolCount = 0;
+    private static int mProtocolCount = 0;
     private int mId = 0;
 
     private CircleProgress mCircleProgress;
@@ -43,8 +45,6 @@ public class DashboardFragment extends Fragment {
     private LeadingTextView mCurrentProtocolText;
     private LeadingTextView mNextProtocolView;
     private int mCurrentStep = 0;
-
-
 
 
     @Override
@@ -60,13 +60,13 @@ public class DashboardFragment extends Fragment {
         Log.i("DashboardFragment", "In onCreateView");
         mId = getArguments().getInt(ARG_SECTION_NUMBER);
         final View rootView;
-        if (mConstructedViews.get(mId) == null) {
+       // if (mConstructedViews.get(mId) == null) {
             Log.i(this.getClass().toString(), "Creating Dashboard Fragment for protocol id " + Integer.toString(mId));
             rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        } else {
-            rootView = mConstructedViews.get(mId);
-            ((ViewGroup)rootView.getParent()).removeView(rootView);
-        }
+      //  } else {
+      //      rootView = mConstructedViews.get(mId);
+      //      ((ViewGroup)rootView.getParent()).removeView(rootView);
+      //  }
 
         if(mProtocolNames.get(mId) == null) {
             getActivity().getActionBar().setTitle(getProtocolName(mId));
@@ -175,12 +175,25 @@ public class DashboardFragment extends Fragment {
         }
     }
 
+    public static void reDraw() {
+        mProtocolCount = TimerDatabaseWorker.getInstance().getProtocolCount();
+        for(int i = 0; i < mProtocolCount; ++i) {
+            mLoadedFragments.set(i, new DashboardFragment());
+        }
+    }
+
     /**
      * Returns a new instance of this fragment for the given section
      * number.
      */
     public static DashboardFragment newInstance(int sectionNumber) {
-        DashboardFragment fragment = new DashboardFragment();
+        DashboardFragment fragment;
+        if(mLoadedFragments.get(sectionNumber) == null) {
+            fragment = new DashboardFragment();
+            mLoadedFragments.set(sectionNumber,fragment);
+        } else {
+            fragment = mLoadedFragments.get(sectionNumber);
+        }
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
